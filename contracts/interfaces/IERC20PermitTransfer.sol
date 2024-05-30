@@ -6,7 +6,7 @@ interface IERC20PermitTransfer {
      * @notice Transfer tokens with permit.
      *
      * This function makes transfer from with permitting amount from the ERC20 token.
-     * First of all method calls permit method in the initial token for the message sender and
+     * First of all method calls permit method in the initial token for the contract and
      * exact amount of tokens to make transfer and cover fee amount (this values have to be
      * calculated and changed off-chain). Next step is to make transfer to the original recipient and the
      * last action is to make transfer fee to the transaction sender.

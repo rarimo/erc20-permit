@@ -1,12 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import "hardhat/console.sol";
-import "./interfaces/IERC20PermitTransfer.sol";
-
+import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {ERC20Permit} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
 
-contract ERC20PermitTransfer is IERC20PermitTransfer {
+import {IERC20PermitTransfer} from "./interfaces/IERC20PermitTransfer.sol";
+
+contract ERC20PermitTransfer is IERC20PermitTransfer, Ownable {
+    constructor(address owner_) Ownable(owner_) {}
+
     /**
      * @inheritdoc IERC20PermitTransfer
      */
@@ -20,12 +22,12 @@ contract ERC20PermitTransfer is IERC20PermitTransfer {
         uint8 v_,
         bytes32 r_,
         bytes32 s_
-    ) external {
+    ) external onlyOwner {
         // Make permit from ERC20 token for the exact amount to transfer. This function checks
         // permit signature and increases allowance for the transaction sender.
         ERC20Permit(token_).permit(
             owner_,
-            msg.sender,
+            address(this),
             amount_ + feeAmount_,
             deadline_,
             v_,
