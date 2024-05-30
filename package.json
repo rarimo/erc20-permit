@@ -34,6 +34,7 @@
     "@openzeppelin/contracts-upgradeable": "5.0.2",
     "@solarity/solidity-lib": "2.7.2",
     "dotenv": "16.4.5",
+    "ethereumjs-util": "^7.1.5",
     "hardhat": "2.20.1",
     "typechain": "8.3.2"
   },
